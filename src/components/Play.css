@@ -1,0 +1,290 @@
+/* Play.css – Pro polish v2  ───────────────────────────────────── */
+
+/* 0. Import a variable font once in <head>  (optional)
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+*/
+
+/* 1. Tokens */
+:root {
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --h-space: 1.25rem;
+
+  --clr-bg: #f5f7fa;
+  --clr-card: #ffffffcc; /* translucent white */
+  --clr-glass: #ffffffee;
+  --clr-text: #1f2937;
+  --clr-muted: #6b7280;
+  --clr-primary: #1a73e8;
+  --clr-danger: #dc3545;
+  --clr-success: #22c55e;
+  --clr-dark: #111827;
+  --clr-border: #e5e7eb;
+  --radius: 10px;
+  --shadow: 0 4px 14px rgba(31, 41, 55, 0.08);
+  --trans: 0.18s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+/* dark‑mode support – wrap root <body class="theme-dark"> if desired */
+.theme-dark {
+  --clr-bg: #111827;
+  --clr-card: #1b2431;
+  --clr-text: #e2e8f0;
+  --clr-muted: #94a3b8;
+  --clr-border: #253044;
+  --shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* 2. Layout container */
+.play-container {
+  font-family: var(--font-sans);
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  margin-inline: auto;
+  max-width: 1040px;
+  padding: calc(var(--h-space) - 0.25rem) var(--h-space) 2.5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+/* ✨ Top “Name / League / Team / Timer” strip */
+.play-top {
+  /* two columns on wide screens, single‑column on mobile */
+  display: grid;
+  grid-template-columns: repeat(auto‑fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+  background: #f7f9fc;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e6ef;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(16, 24, 40, 0.05);
+}
+
+.play-field {
+  display: grid;
+  grid-template-columns: 92px 1fr; /* keeps controls neatly aligned */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.play-label {
+  font-weight: 600;
+  color: #344054;
+}
+
+.play-input {
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid #d0d5dd;
+  background: #fff;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+
+.play-field label {
+  font-weight: 600;
+  color: var(--clr-muted);
+}
+.play-input,
+.play-value {
+  flex: 1 1 auto;
+}
+
+.play-input {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 0.48rem 0.6rem;
+  font-size: 0.95rem;
+  background: var(--clr-glass);
+  color: inherit;
+}
+
+/* 4. Main two‑column split */
+.play-content {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .play-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 5. Card & Map panels */
+.play-card,
+.play-map {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: saturate(180%) blur(16px); /* subtle glass effect */
+}
+
+/* Map panel */
+.play-map {
+  padding: 1rem;
+}
+.play-map-heading {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-primary);
+}
+
+/* Trivia card */
+.play-card {
+  padding: 1.2rem 1.35rem;
+  display: grid;
+  gap: 1rem;
+}
+.play-question {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* Timer progress‑bar inside Name‑field value (CSS only!)  */
+.play-timer-bar {
+  position: relative;
+}
+.play-timer-bar::after {
+  content: "";
+  position: absolute;
+  inset: 100% 0 0 0; /* sticks to bottom */
+  background: var(--clr-primary);
+  height: 3px;
+  transform-origin: left;
+  transform: scaleX(var(--percent, 1));
+  transition: transform 1s linear;
+}
+
+/* Misc states */
+.play-error {
+  color: var(--clr-danger);
+  font-weight: 700;
+}
+.play-loading {
+  color: var(--clr-muted);
+  font-style: italic;
+}
+
+.play-button {
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.93rem;
+  background: var(--clr-dark);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: filter var(--trans), transform var(--trans);
+}
+.play-button:hover {
+  filter: brightness(0.9);
+  transform: translateY(-1px);
+}
+.play-button.correct {
+  background: var(--clr-success);
+}
+.play-button.wrong {
+  background: var(--clr-danger);
+}
+
+.play-bonus {
+  color: var(--clr-success);
+  font-weight: 600;
+  text-align: center;
+}
+
+.play-explanation {
+  font-style: italic;
+  color: var(--clr-muted);
+}
+
+/* Badge wall */
+.play-badge-wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+}
+.badge {
+  background: #ffe600;
+  padding: 0.28rem 0.65rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Fun facts */
+.play-facts {
+  line-height: 1.45;
+  color: var(--clr-text);
+  border-left: 3px solid var(--clr-primary);
+  padding-left: 0.75rem;
+}
+.play-facts li {
+  margin: 0.25rem 0;
+}
+
+/* Controls */
+.play-controls {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
+}
+.play-controls button {
+  min-width: 120px;
+}
+.play-controls button:nth-child(1) {
+  background: var(--clr-primary);
+}
+.play-controls button:nth-child(2) {
+  background: var(--clr-danger);
+}
+.play-controls button:nth-child(3) {
+  background: var(--clr-dark);
+}
+
+/* Footer */
+.play-footer {
+  text-align: center;
+  margin-top: 1.2rem;
+}
+.play-footer button {
+  background: var(--clr-primary);
+}
+
+/* Animations */
+.fade-in {
+  animation: fade 0.25s var(--trans);
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.pop-in {
+  animation: pop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
