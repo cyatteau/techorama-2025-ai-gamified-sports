@@ -1,6 +1,114 @@
-# Gamified Sports Trivia
+# ⚽ AI-Powered Football Trivia
 
-A React + Vite prototype that simulates a live sports trivia game using AI-generated questions (via Google Gemini). Features include scoring, badges, adaptive difficulty, and a map-based team selector using Esri Leaflet. Built for the "AI-Powered Gamification for Sports Apps" talk at Techorama 2025.
+A **React + Vite** web app that turns sports trivia into a real-time, audience-playable game.  
+Built for the **“AI-Powered Gamification for Sports Apps”** talk (Techorama 2025).
 
-.env:
-GEMINI_API_KEY=your_google_gemini_api_key
+<div align="center">
+  <img alt="live demo" src="docs/demo.gif" width="650">
+</div>
+
+---
+
+## ✨ Features at a Glance
+
+| Area                   | What you’ll see                                                     |
+|------------------------|---------------------------------------------------------------------|
+| **AI-generated Questions** | Google Gemini 1.5 Flash creates unique Q&As on demand.         |
+| **Adaptive Difficulty**    | Questions get harder as your streak grows.                      |
+| **Gamification**           | Score, streak, speed-answer bonus, badges for 3 & 5 correct.     |
+| **Live Multiplayer**       | Node + Socket.IO broadcasts a leaderboard in real time.         |
+| **Map Selector**           | Pick your club by clicking its stadium pin (Esri Leaflet).      |
+| **Persist & Continue**     | Leave *Play*, browse the leaderboard, resume with **Continue Game**. |
+| **One-click Share**        | Copy your score to clipboard to challenge friends.             |
+
+---
+
+## 🗂 Project Structure
+
+\`\`\`
+server/                  Node + Socket.IO live server
+src/
+ ├─ components/
+ │   ├─ Play.jsx         main game screen
+ |   ├─ Play.css         main screen styling
+ │   ├─ Leaderboard.jsx  real-time leaderboard
+ │   └─ StadiumMap.jsx   clickable Esri Leaflet map
+ ├─ utils/               helpers (Gemini API, socket client)
+ ├─ App.jsx, main.jsx    Vite entry
+ ├─ index.css            root page styling
+ └─ index.html           root page
+\`\`\`
+
+---
+
+## 🚀 Getting Started
+
+### 1 · Clone & Install
+
+\`\`\`bash
+git clone https://github.com/your-handle/ai-football-trivia.git
+cd ai-football-trivia
+npm install
+\`\`\`
+
+### 2 · Environment Variables
+
+Create a **\`.env\`** file in the project root with:
+
+\`\`\`env
+# AI (Google Gemini 1.5 Flash)
+VITE_GEMINI_API_KEY=YOUR_GEMINI_KEY
+VITE_ARCGIS_API_KEY=YOUR_ARCGIS_KEY
+
+# Socket.IO URL (optional for remote demos)
+# Leave blank for localhost:4000 or paste ngrok HTTPS URL
+VITE_SOCKET_URL=
+\`\`\`
+
+### 3 · Run the Live Server
+
+\`\`\`bash
+node server/server.js
+\`\`\`
+
+> **Tip:** Expose via ngrok for a remote demo:
+> \`\`\`bash
+> npx ngrok http 4000
+> \`\`\`
+
+### 4 · Start the React Client
+
+\`\`\`bash
+npm run dev
+\`\`\`
+
+Open your browser at \`http://localhost:5173\` (or your ngrok URL) in multiple tabs/devices, play a round, and watch the **Leaderboard** update in real time!
+
+---
+
+## 🔧 Available Scripts
+
+| Command                   | Description                                 |
+|---------------------------|---------------------------------------------|
+| \`npm run dev\`             | Launch Vite dev server with hot-reload      |
+| \`npm run build\`           | Create production build in \`dist/\`          |
+| \`node server/server.js\`   | Start Socket.IO server (port 4000 by default) |
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend:** React 18, Vite  
+- **Realtime:** Socket.IO 4  
+- **AI:** Google Gemini 1.5-flash  
+- **Map:** Esri Leaflet
+- **Tunneling:** ngrok for remote demos  
+
+---
+
+## 📝 License
+
+MIT © Courtney Yatteau
+
+Built with ☕ and ⚛️.
+PRs and ⭐ welcome!
