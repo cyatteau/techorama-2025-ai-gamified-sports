@@ -1,75 +1,71 @@
+// src/components/Leaderboard.jsx
+import { useEffect, useState } from "react";
+import socket from "../utils/liveSocket";
 import { Link } from "react-router-dom";
+import "./Play.css"; // uses your existing table styles
 
 export default function Leaderboard() {
-  const userScore = Number(localStorage.getItem("score")) || 0;
-  const userName = localStorage.getItem("playerName") || "You";
+  const me = localStorage.getItem("playerName") || "Anonymous";
+  const [board, setBoard] = useState([]);
 
-  const mockScores = [
-    { name: "Alex", score: 12 },
-    { name: "Taylor", score: 10 },
-    { name: "Jordan", score: 9 },
-    { name: "Casey", score: 7 },
-    { name: userName, score: userScore },
-  ].sort((a, b) => b.score - a.score);
+  /* listen for live updates */
+  useEffect(() => {
+    function handle(list) {
+      console.log("📊 LB update:", list);
+      setBoard(list);
+    }
+    socket.on("leaderboard", handle);
+
+    // on first mount ask the server for a fresh snapshot
+    socket.emit("leaderboard?");
+
+    return () => socket.off("leaderboard", handle);
+  }, []);
 
   return (
-    <main style={styles.container}>
-      <h2>🏆 Leaderboard</h2>
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Player</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {mockScores.map((entry, i) => (
-            <tr
-              key={entry.name + entry.score}
-              style={entry.name === userName ? styles.highlight : {}}
-            >
-              <td>{i + 1}</td>
-              <td>{entry.name}</td>
-              <td>{entry.score}</td>
+    <main className="leaderboard-container">
+      <h2>🏆 Live Leaderboard</h2>
+
+      {board.length === 0 ? (
+        <p style={{ textAlign: "center" }}>Waiting for first score…</p>
+      ) : (
+        <table className="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Player</th>
+              <th>Score</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <button style={{ ...styles.button, marginTop: "2rem" }}>
-          🏠 Back to Home
-        </button>
-      </Link>
+          </thead>
+          <tbody>
+            {board.map((entry, i) => {
+              let rowStyle = {};
+              if (i === 0) rowStyle = { background: "#ffd700" }; // gold
+              else if (i === 1) rowStyle = { background: "#c0c0c0" }; // silver
+              else if (i === 2) rowStyle = { background: "#cd7f32" }; // bronze
+              else if (entry.name === me)
+                rowStyle = { background: "#ffe600", fontWeight: "bold" };
+
+              return (
+                <tr key={entry.name} style={rowStyle}>
+                  <td>{i + 1}</td>
+                  <td>{entry.name}</td>
+                  <td>{entry.score}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      )}
+
+      <div className="play-footer">
+        <Link to="/" className="play-footer-link">
+          <button>🏠 Back</button>
+        </Link>
+        <Link to="/play" className="play-footer-link">
+          <button>🎮 Play</button>
+        </Link>
+      </div>
     </main>
   );
 }
-
-const styles = {
-  container: {
-    padding: "2rem",
-    maxWidth: "600px",
-    margin: "0 auto",
-    textAlign: "center",
-  },
-  table: {
-    width: "100%",
-    marginTop: "1rem",
-    borderCollapse: "collapse",
-    fontSize: "1.1rem",
-  },
-  highlight: {
-    backgroundColor: "#ffe600",
-    fontWeight: "bold",
-  },
-  button: {
-    fontSize: "1rem",
-    padding: "0.75rem 1.5rem",
-    borderRadius: "8px",
-    backgroundColor: "#1a1a1a",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    transition: "all 0.3s ease",
-  },
-};

@@ -13,6 +13,7 @@
   --radius: 8px;
   --spacing: 1rem;
   --transition: 0.2s ease;
+  --primary-dark: #1558b0;
 }
 
 * {
@@ -50,23 +51,27 @@ h4 {
 }
 
 button {
-  padding: 0.6em 1.2em;
+  background: var(--clr-primary);
+  color: #fff;
   border: none;
   border-radius: var(--radius);
-  background: var(--primary);
-  color: #fff;
+  padding: 0.6em 1.2em;
   font-size: 1rem;
   cursor: pointer;
-  transition: background var(--transition);
+  transition: background var(--trans), transform var(--trans);
 }
+
 button:hover {
-  background: darken(var(--primary), 10%);
+  background: var(--primary-dark);
+  transform: translateY(-1px);
 }
+
+/* If you have any buttons that need a different color (eg. danger) you can still override: */
 button.danger {
-  background: var(--danger);
+  background: var(--clr-danger);
 }
 button.danger:hover {
-  background: darken(var(--danger), 10%);
+  filter: brightness(0.4);
 }
 
 input[type="text"],
@@ -106,6 +111,35 @@ select {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+/* src/components/Play.css */
+.play-footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* space between buttons */
+  margin-top: 1.2rem;
+}
+
+.play-footer-link button {
+  min-width: 120px;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  background: var(--clr-primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: filter var(--trans), transform var(--trans);
+}
+
+.play-footer-link button:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.play-footer button {
+  background: var(--clr-primary);
 }
 
 table {

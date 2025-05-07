@@ -81,7 +81,6 @@
   line-height: 1.4;
 }
 
-
 .play-field label {
   font-weight: 600;
   color: var(--clr-muted);
@@ -169,26 +168,30 @@
   color: var(--clr-muted);
   font-style: italic;
 }
-
 .play-button {
   padding: 0.55rem 1rem;
   border-radius: var(--radius);
   font-size: 0.93rem;
-  background: var(--clr-dark);
+  background: var(--clr-dark); /* initial default */
   color: #fff;
   border: none;
   cursor: pointer;
   transition: filter var(--trans), transform var(--trans);
 }
-.play-button:hover {
-  filter: brightness(0.9);
-  transform: translateY(-1px);
-}
+
+/* correct / wrong states */
 .play-button.correct {
   background: var(--clr-success);
 }
 .play-button.wrong {
   background: var(--clr-danger);
+}
+
+/* darken *whatever* the background is on hover */
+.play-button:hover {
+  filter: brightness(0.5);
+  transform: translateY(-1px);
+  background: #0056b3; /* darker than #1a73e8 */
 }
 
 .play-bonus {
@@ -227,10 +230,22 @@
 .play-facts li {
   margin: 0.25rem 0;
 }
+.info-box {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.info-box .muted {
+  color: #667085;
+  font-size: 0.9rem;
+}
 
 /* Controls */
 .play-controls {
-  margin-top: auto;
+  margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
@@ -248,14 +263,13 @@
 .play-controls button:nth-child(3) {
   background: var(--clr-dark);
 }
-
-/* Footer */
-.play-footer {
+.start-wrap {
   text-align: center;
-  margin-top: 1.2rem;
+  margin-top: 0.4rem;
+  grid-column: 1/-1;
 }
-.play-footer button {
-  background: var(--clr-primary);
+.muted {
+  color: var(--clr-muted);
 }
 
 /* Animations */
@@ -286,5 +300,48 @@
   100% {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* --- Universal “no‑overflow” safety nets ---------------------------- */
+
+/* 0️⃣ Put everything into border‑box sizing so paddings can’t
+      secretly add width that pushes past 100 vw. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 1️⃣ Force the page to clip any accidental overflow instead of scrolling */
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* === MOBILE SAFE‑AREA PATCH  ( ≤ 480 px ) =========================== */
+@media (max-width: 480px) {
+  /* ① Make the page itself hug the viewport — no side‑scroll */
+  body {
+    padding-inline: 0; /* kill the 1 rem side gutters */
+    display: block; /* flex‑centering not needed here */
+    overflow-x: hidden; /* hard clamp */
+  }
+
+  /* ② Container can now stretch full‑width without overflow */
+  .play-container {
+    max-width: 100%;
+  }
+
+  /* ③ Leaflet map sometimes injects a fixed 600 px wide canvas.
+        Force it to be fluid & let the attribution wrap */
+  .leaflet-container {
+    width: 100% !important;
+  }
+  .leaflet-control-attribution {
+    white-space: normal;
+    font-size: 10px;
   }
 }
