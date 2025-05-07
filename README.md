@@ -20,7 +20,7 @@ Built for the **“AI-Powered Gamification for Sports Apps”** talk (Techorama 
 ---
 
 ## 🗂 Project Structure
-<pre><code>
+<pre>
 server/                  Node + Socket.IO live server
 
 src/
@@ -33,7 +33,7 @@ src/
  ├─ App.jsx, main.jsx    Vite entry
  ├─ index.css            root page styling
  └─ index.html           root page
-</code></pre>
+</pre>
 
 ---
 
@@ -50,10 +50,10 @@ npm install
 ### 2 - Environment Variables
 
 Create a **<code>.env</code>** file in the project root with:
-<pre><code>
+```bash
 VITE_GEMINI_API_KEY=YOUR_GEMINI_KEY
 VITE_ARCGIS_API_KEY=YOUR_ARCGIS_KEY
-</code></pre>
+```
 
 ### 3 - Run the Live Server
 
