@@ -25,7 +25,7 @@ Built for the **“AI-Powered Gamification for Sports Apps”** talk (Techorama 
 
 ## 🗂 Project Structure
 
-\`\`\`
+<pre><code>
 server/                  Node + Socket.IO live server
 src/
  ├─ components/
@@ -37,7 +37,7 @@ src/
  ├─ App.jsx, main.jsx    Vite entry
  ├─ index.css            root page styling
  └─ index.html           root page
-\`\`\`
+</code></pre>
 
 ---
 
@@ -45,17 +45,17 @@ src/
 
 ### 1 · Clone & Install
 
-\`\`\`bash
+<pre><code>bash
 git clone https://github.com/your-handle/ai-football-trivia.git
 cd ai-football-trivia
 npm install
-\`\`\`
+</code></pre>
 
 ### 2 · Environment Variables
 
-Create a **\`.env\`** file in the project root with:
+Create a **<code>.env</code>** file in the project root with:
 
-\`\`\`env
+<pre><code>env
 # AI (Google Gemini 1.5 Flash)
 VITE_GEMINI_API_KEY=YOUR_GEMINI_KEY
 VITE_ARCGIS_API_KEY=YOUR_ARCGIS_KEY
@@ -63,26 +63,26 @@ VITE_ARCGIS_API_KEY=YOUR_ARCGIS_KEY
 # Socket.IO URL (optional for remote demos)
 # Leave blank for localhost:4000 or paste ngrok HTTPS URL
 VITE_SOCKET_URL=
-\`\`\`
+</code></pre>
 
 ### 3 · Run the Live Server
 
-\`\`\`bash
+<pre><code>bash
 node server/server.js
-\`\`\`
+</code></pre>
 
 > **Tip:** Expose via ngrok for a remote demo:
-> \`\`\`bash
+> <pre><code>bash
 > npx ngrok http 4000
-> \`\`\`
+> </code></pre>
 
 ### 4 · Start the React Client
 
-\`\`\`bash
+<pre><code>bash
 npm run dev
-\`\`\`
+</code></pre>
 
-Open your browser at \`http://localhost:5173\` (or your ngrok URL) in multiple tabs/devices, play a round, and watch the **Leaderboard** update in real time!
+Open your browser at <code>http://localhost:5173</code> (or your ngrok URL) in multiple tabs/devices, play a round, and watch the **Leaderboard** update in real time!
 
 ---
 
@@ -90,9 +90,9 @@ Open your browser at \`http://localhost:5173\` (or your ngrok URL) in multiple t
 
 | Command                   | Description                                 |
 |---------------------------|---------------------------------------------|
-| \`npm run dev\`             | Launch Vite dev server with hot-reload      |
-| \`npm run build\`           | Create production build in \`dist/\`          |
-| \`node server/server.js\`   | Start Socket.IO server (port 4000 by default) |
+| <code>npm run dev</code>             | Launch Vite dev server with hot-reload      |
+| <code>npm run build</code>           | Create production build in <code>dist/</code>          |
+| <code>node server/server.js</code>   | Start Socket.IO server (port 4000 by default) |
 
 ---
 
