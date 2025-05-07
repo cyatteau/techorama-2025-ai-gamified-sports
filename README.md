@@ -45,11 +45,11 @@ src/
 
 ### 1 · Clone & Install
 
-<pre><code>bash
+```bash
 git clone https://github.com/your-handle/ai-football-trivia.git
 cd ai-football-trivia
 npm install
-</code></pre>
+```
 
 ### 2 · Environment Variables
 
@@ -67,20 +67,20 @@ VITE_SOCKET_URL=
 
 ### 3 · Run the Live Server
 
-<pre><code>bash
+```bash
 node server/server.js
-</code></pre>
+```
 
 > **Tip:** Expose via ngrok for a remote demo:
-> <pre><code>bash
+> ```bash
 > npx ngrok http 4000
-> </code></pre>
+> ```
 
 ### 4 · Start the React Client
 
-<pre><code>bash
+```bash
 npm run dev
-</code></pre>
+```
 
 Open your browser at <code>http://localhost:5173</code> (or your ngrok URL) in multiple tabs/devices, play a round, and watch the **Leaderboard** update in real time!
 
