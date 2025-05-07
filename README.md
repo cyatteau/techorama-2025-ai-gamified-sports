@@ -3,10 +3,6 @@
 A **React + Vite** web app that turns sports trivia into a real-time, audience-playable game.  
 Built for the **“AI-Powered Gamification for Sports Apps”** talk (Techorama 2025).
 
-<div align="center">
-  <img alt="live demo" src="docs/demo.gif" width="650">
-</div>
-
 ---
 
 ## ✨ Features at a Glance
@@ -24,9 +20,9 @@ Built for the **“AI-Powered Gamification for Sports Apps”** talk (Techorama 
 ---
 
 ## 🗂 Project Structure
-
 <pre><code>
 server/                  Node + Socket.IO live server
+
 src/
  ├─ components/
  │   ├─ Play.jsx         main game screen
@@ -55,14 +51,9 @@ npm install
 
 Create a **<code>.env</code>** file in the project root with:
 
-<pre><code>env
-# AI (Google Gemini 1.5 Flash)
+<pre><code>
 VITE_GEMINI_API_KEY=YOUR_GEMINI_KEY
 VITE_ARCGIS_API_KEY=YOUR_ARCGIS_KEY
-
-# Socket.IO URL (optional for remote demos)
-# Leave blank for localhost:4000 or paste ngrok HTTPS URL
-VITE_SOCKET_URL=
 </code></pre>
 
 ### 3 · Run the Live Server
