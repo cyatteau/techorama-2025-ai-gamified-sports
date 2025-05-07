@@ -37,9 +37,9 @@ src/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 1 · Clone & Install
+### 1 - Clone & Install
 
 ```bash
 git clone https://github.com/your-handle/ai-football-trivia.git
@@ -47,16 +47,15 @@ cd ai-football-trivia
 npm install
 ```
 
-### 2 · Environment Variables
+### 2 - Environment Variables
 
 Create a **<code>.env</code>** file in the project root with:
-
 <pre><code>
 VITE_GEMINI_API_KEY=YOUR_GEMINI_KEY
 VITE_ARCGIS_API_KEY=YOUR_ARCGIS_KEY
 </code></pre>
 
-### 3 · Run the Live Server
+### 3 - Run the Live Server
 
 ```bash
 node server/server.js
@@ -67,7 +66,7 @@ node server/server.js
 > npx ngrok http 4000
 > ```
 
-### 4 · Start the React Client
+### 4 - Start the React Client
 
 ```bash
 npm run dev
